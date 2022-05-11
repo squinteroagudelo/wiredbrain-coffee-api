@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Server-side Events</title>
+    </head>
+    <body>
+        <ul></ul>
+
+        <script type="text/javascript">
+        if(!!window.EventSource){
+            let eventSource = new EventSource('products/events'); // http://localhost:8080/products/events
+            let eventList = document.querySelector('ul');
+
+            eventSource.onmessage = function(e) {
+                let newElement = document.createElement('li');
+                newElement.textContent = `Event: ${e.data}`;
+                eventList.appendChild(newElement);
+            }
+        } else {
+            alert("The browser doesn't support SSE");
+        }
+
+        </script>
+    </body>
+</html>
